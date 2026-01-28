@@ -38,26 +38,3 @@ spec:
       kind: Deployment
       jsonPointers:
         - /spec/replicas
----
-# Platforms Application (manages platform resources like istio-system namespace)
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: platforms
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/ravindravarigalla786/istio-system.git
-    targetRevision: main
-    path: argocd/platforms
-    directory:
-      recurse: true
-      include: '*.yaml'
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
-  syncPolicy:
-    automated: null  # Manual sync
-    syncOptions:
-      - CreateNamespace=true
