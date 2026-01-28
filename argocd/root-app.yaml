@@ -1,0 +1,63 @@
+# ArgoCD Root Application (App of Apps)
+# This is the bootstrap application that manages all other applications
+# Apply this first: kubectl apply -f argocd/root-app.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ravindravarigalla786/istio-system.git
+    targetRevision: main
+    path: argocd
+    directory:
+      recurse: true
+      include: '*.yaml'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated: null  # Manual sync
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+---
+# Platforms Application (manages platform resources like istio-system namespace)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platforms
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ravindravarigalla786/istio-system.git
+    targetRevision: main
+    path: argocd/platforms
+    directory:
+      recurse: true
+      include: '*.yaml'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated: null  # Manual sync
+    syncOptions:
+      - CreateNamespace=true
