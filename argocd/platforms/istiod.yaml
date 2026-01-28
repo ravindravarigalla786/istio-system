@@ -12,9 +12,7 @@ spec:
     helm:
       releaseName: istiod
       values: |
-        nodeSelector:
-          nodegroup: system
-        # Add any other overrides here for istiod
+        profile: ambient
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
