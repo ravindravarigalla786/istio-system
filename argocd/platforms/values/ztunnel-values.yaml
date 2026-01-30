@@ -1,5 +1,1 @@
-nodeSelector:
-  karpenter.sh/nodepool: general
 
-tolerations:
-- operator: Exists
