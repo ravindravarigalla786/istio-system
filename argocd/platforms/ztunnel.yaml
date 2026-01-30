@@ -5,18 +5,14 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
+  sources:
+  - repoURL: https://istio-release.storage.googleapis.com/charts
     chart: ztunnel
     targetRevision: 1.28.2
     helm:
       releaseName: ztunnel
       valueFiles:
       - $values/argocd/platforms/values/ztunnel-values.yaml
-  sources:
-  - repoURL: https://istio-release.storage.googleapis.com/charts
-    chart: ztunnel
-    targetRevision: 1.28.2
   - repoURL: https://github.com/ravindravarigalla786/istio-system.git
     targetRevision: main
     ref: values

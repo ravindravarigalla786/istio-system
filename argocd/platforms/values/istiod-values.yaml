@@ -11,10 +11,16 @@ global:
 
 pilot:
   env:
-    PILOT_ENABLE_AMBIENT: true
+    PILOT_ENABLE_AMBIENT: "true"
   nodeSelector:
     karpenter.sh/nodepool: system
   tolerations:
   - key: CriticalAddonsOnly
     operator: Exists
     effect: NoSchedule
+
+# Explicitly set meshConfig to enable ambient
+meshConfig:
+  defaultConfig:
+    proxyMetadata:
+      ISTIO_META_ENABLE_HBONE: "true"

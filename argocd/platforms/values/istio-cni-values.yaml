@@ -1,12 +1,18 @@
 profile: ambient
 
+# Use distroless image for better security
+tag: 1.28.2-distroless
+
 cni:
-  # Ambient mode requires CNI plugin for transparent traffic capture
+  # Ambient mode specific settings
   ambient:
     enabled: true
   
+  # Node selector for general purpose nodes
   nodeSelector:
     karpenter.sh/nodepool: general
+  
+  # Tolerations to run on all general nodes
   tolerations:
   - operator: Exists
   
@@ -17,3 +23,6 @@ cni:
   excludeNamespaces:
   - istio-system
   - kube-system
+  
+  # Ensure ztunnel socket directory is mounted (required for ambient)
+  mountZtunnelSocket: true
