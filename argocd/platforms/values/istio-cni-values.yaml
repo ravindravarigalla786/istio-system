@@ -1,8 +1,7 @@
 profile: ambient
 
 # Use distroless image for better security
-tag: 1.28.2-distroless
-
+tag: 1.28.2
 cni:
   # Ambient mode specific settings
   ambient:
