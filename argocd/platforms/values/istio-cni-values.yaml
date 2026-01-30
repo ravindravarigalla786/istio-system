@@ -1,7 +1,19 @@
 profile: ambient
 
 cni:
+  # Ambient mode requires CNI plugin for transparent traffic capture
+  ambient:
+    enabled: true
+  
   nodeSelector:
     karpenter.sh/nodepool: general
   tolerations:
   - operator: Exists
+  
+  # Log level
+  logLevel: info
+  
+  # Exclude namespaces from mesh
+  excludeNamespaces:
+  - istio-system
+  - kube-system
