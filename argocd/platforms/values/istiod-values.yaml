@@ -1,5 +1,14 @@
 profile: ambient
 
+# Global settings apply to all istiod components
+global:
+  defaultNodeSelector:
+    karpenter.sh/nodepool: system
+  defaultTolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+    effect: NoSchedule
+
 pilot:
   env:
     PILOT_ENABLE_AMBIENT: true
