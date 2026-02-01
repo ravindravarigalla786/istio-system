@@ -1,7 +1,14 @@
 profile: ambient
 
-# Use distroless image for better security
-tag: 1.28.3
+# Production-ready image configuration
+hub: docker.io/istio
+tag: 1.28.3-distroless
+variant: distroless
+imagePullPolicy: IfNotPresent
+resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
 cni:
   # Ambient mode specific settings
   ambient:
