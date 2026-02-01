@@ -1,5 +1,13 @@
 profile: ambient
 
+# Replica configuration
+replicaCount: 2
+
+# Autoscaling configuration
+autoscaleEnabled: true
+autoscaleMin: 2
+autoscaleMax: 5
+
 # Global settings apply to all istiod components
 global:
   defaultNodeSelector:
