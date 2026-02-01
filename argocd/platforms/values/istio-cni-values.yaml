@@ -18,10 +18,5 @@ cni:
   # Log level
   logLevel: info
   
-  # Exclude namespaces from mesh
-  excludeNamespaces:
-  - istio-system
-  - kube-system
-  
   # Ensure ztunnel socket directory is mounted (required for ambient)
   mountZtunnelSocket: true

@@ -24,7 +24,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
-    automated: null  # Manual sync
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
     retry:
@@ -58,6 +60,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
-    automated: null  # Manual sync
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
