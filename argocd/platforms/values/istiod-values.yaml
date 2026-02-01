@@ -11,8 +11,8 @@ autoscaleMax: 5
 # Resource configuration
 resources:
   requests:
-    cpu: 1
-    memory: 4Gi
+    cpu: 500m
+    memory: 1Gi
 
 # Global settings apply to all istiod components
 global:
